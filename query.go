@@ -165,6 +165,10 @@ func syncInfo(pkgS []string, flags []string) (err error) {
 		//arguments.addArg(flags...)
 		arguments.addTarget(repoS...)
 		err = passToPacman(arguments)
+
+		if err != nil {
+			return
+		}
 	}
 
 	if len(aurS) != 0 {
