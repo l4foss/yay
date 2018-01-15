@@ -221,4 +221,3 @@ func passToPacman(op string, pkgs []string, flags []string) error {
 	err := cmd.Run()
 	return err
 }
-}
