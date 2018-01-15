@@ -160,11 +160,11 @@ func syncInfo(pkgS []string, flags []string) (err error) {
 
 	//repo always goes first
 	if len(repoS) != 0 {
-		err = passToPacman("-Si", repoS, flags)
-
-		if err != nil {
-			return
-		}
+		arguments := makeArguments()
+		arguments.addArg("S", "i")
+		//arguments.addArg(flags...)
+		arguments.addTarget(repoS...)
+		err = passToPacman(arguments)
 	}
 
 	if len(aurS) != 0 {
@@ -175,14 +175,6 @@ func syncInfo(pkgS []string, flags []string) (err error) {
 		for _, aurP := range q {
 			PrintInfo(&aurP)
 		}
-	}
-
-	if len(repoS) != 0 {
-		arguments := makeArguments()
-		arguments.addArg("S", "i")
-		//arguments.addArg(flags...)
-		arguments.addTarget(repoS...)
-		err = passToPacman(arguments)
 	}
 
 	return
